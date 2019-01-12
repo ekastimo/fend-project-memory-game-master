@@ -2,22 +2,22 @@
  * Create a list that holds all of your cards
  */
 const cards = [
-    { "id": "card1", "className": "fa fa-diamond" },
-    { "id": "card2", "className": "fa fa-paper-plane-o" },
-    { "id": "card3", "className": "fa fa-anchor" },
-    { "id": "card4", "className": "fa fa-bolt" },
-    { "id": "card5", "className": "fa fa-cube" },
-    { "id": "card6", "className": "fa fa-anchor" },
-    { "id": "card7", "className": "fa fa-leaf" },
-    { "id": "card8", "className": "fa fa-bicycle" },
-    { "id": "card9", "className": "fa fa-diamond" },
-    { "id": "card10", "className": "fa fa-bomb" },
-    { "id": "card11", "className": "fa fa-leaf" },
-    { "id": "card12", "className": "fa fa-bomb" },
-    { "id": "card13", "className": "fa fa-bolt" },
-    { "id": "card14", "className": "fa fa-bicycle" },
-    { "id": "card15", "className": "fa fa-paper-plane-o" },
-    { "id": "card16", "className": "fa fa-cube" }
+    { 'id': 'card1', 'className': 'fa fa-diamond' },
+    { 'id': 'card2', 'className': 'fa fa-paper-plane-o' },
+    { 'id': 'card3', 'className': 'fa fa-anchor' },
+    { 'id': 'card4', 'className': 'fa fa-bolt' },
+    { 'id': 'card5', 'className': 'fa fa-cube' },
+    { 'id': 'card6', 'className': 'fa fa-anchor' },
+    { 'id': 'card7', 'className': 'fa fa-leaf' },
+    { 'id': 'card8', 'className': 'fa fa-bicycle' },
+    { 'id': 'card9', 'className': 'fa fa-diamond' },
+    { 'id': 'card10', 'className': 'fa fa-bomb' },
+    { 'id': 'card11', 'className': 'fa fa-leaf' },
+    { 'id': 'card12', 'className': 'fa fa-bomb' },
+    { 'id': 'card13', 'className': 'fa fa-bolt' },
+    { 'id': 'card14', 'className': 'fa fa-bicycle' },
+    { 'id': 'card15', 'className': 'fa fa-paper-plane-o' },
+    { 'id': 'card16', 'className': 'fa fa-cube' }
 ]
 
 let completeCards = [
@@ -41,14 +41,14 @@ const ratingBreakPoints = [
 
 /*
  * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - shuffle the list of cards using the provided 'shuffle' method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(toShuffle) {
-    const array = [...toShuffle]
+    const array = [...toShuffle]// avoid mutations to orriginal array
     let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -65,13 +65,13 @@ function renderCards() {
     //var shuffledCards = shuffle(cards);
     var cardsHtml = cards.map(function (card) {
         return `
-        <li class="card" id="${card.id}">
-            <i class="${card.className}"></i>
+        <li class='card' id='${card.id}'>
+            <i class='${card.className}'></i>
         </li>
     `
     }).join('')
     //render cards
-    const dec = document.querySelector(".deck");
+    const dec = document.querySelector('.deck');
     dec.innerHTML = cardsHtml;
 }
 
@@ -79,7 +79,7 @@ function renderCards() {
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of 'open' cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
@@ -150,13 +150,13 @@ function computePlayerRating() {
 function renderRating() {
     const rating = computePlayerRating(movesCount);
     const ratingHtml = Array(rating).fill().map(function () {
-        return `<li><i class="fa fa-star"></i></li>`
+        return `<li><i class='fa fa-star'></i></li>`
     }).join('');
-    document.querySelector(".stars").innerHTML = ratingHtml;
+    document.querySelector('.stars').innerHTML = ratingHtml;
 }
 
 function renderMoves() {
-    document.querySelector(".moves").textContent = movesCount;
+    document.querySelector('.moves').textContent = movesCount;
 }
 
 function testCompletion() {
@@ -210,15 +210,15 @@ function handleClick() {
         processCardClick(this);
     } else {
         // TODO this can just be igored
-        alert("Oops, Invalid Selection");
+        alert('Oops, Invalid Selection');
     }
 }
 
 function createListeners() {
     // Add Event Listeners
-    document.querySelectorAll(".card")
+    document.querySelectorAll('.card')
         .forEach(function (card) {
-            card.addEventListener("click", handleClick)
+            card.addEventListener('click', handleClick)
         })
 }
 
@@ -236,8 +236,6 @@ function resetGame() {
     endTime = undefined;
 }
 
-document.querySelector(".restart")
-    .addEventListener("click", resetGame)
+document.querySelector('.restart')
+    .addEventListener('click', resetGame)
 resetGame()
-
-
