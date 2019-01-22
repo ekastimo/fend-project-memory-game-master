@@ -29,6 +29,34 @@ let startTime = undefined
 let endTime = undefined
 let movesCount = 0
 let playerRating = 5
+const timerInstance = new easytimer.Timer();
+const timerDisplay = document.querySelector('#basicUsage');
+timerInstance.addEventListener('secondsUpdated', function (e) {
+    const time = timerInstance.getTimeValues().toString();
+    timerDisplay.textContent = time
+});
+const modal = document.getElementById('myModal')
+function configureModel() {
+    const span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
+function openModel(message) {
+    document.querySelector("#modelText").textContent = message
+    modal.style.display = "block";
+}
+
 // Moves: Rating
 const ratingBreakPoints = [
     { moves: 30, rating: 5 },
@@ -62,15 +90,14 @@ function shuffle(toShuffle) {
 }
 
 function renderCards() {
-    //var shuffledCards = shuffle(cards);
-    var cardsHtml = cards.map(function (card) {
+    var shuffledCards = shuffle(cards);
+    var cardsHtml = shuffledCards.map(function (card) {
         return `
         <li class='card' id='${card.id}'>
             <i class='${card.className}'></i>
         </li>
     `
     }).join('')
-    //render cards
     const dec = document.querySelector('.deck');
     dec.innerHTML = cardsHtml;
 }
@@ -164,11 +191,11 @@ function testCompletion() {
 
     if (isCompleted) {
         const rating = computePlayerRating(movesCount);
-        if(typeof endTime === 'undefined'){
+        if (typeof endTime === 'undefined') {
             endTime = new Date().getTime();
         }
-        const duration = (endTime - startTime)/(1000* 60);
-        alert(`!!!Hurray, You won!!!! \n Moves: ${movesCount} Rating: ${rating} Duration: ${duration} Minutes`)
+        const duration = (endTime - startTime) / (1000 * 60);
+        openModel(`!!!Hurray, You won!!!! \n Moves: ${movesCount} Rating: ${rating} Duration: ${duration} Minutes`)
     }
     return isCompleted;
 }
@@ -210,7 +237,7 @@ function handleClick() {
         processCardClick(this);
     } else {
         // TODO this can just be igored
-        alert('Oops, Invalid Selection');
+        // openModel('Oops, Invalid Selection');
     }
 }
 
@@ -234,8 +261,11 @@ function resetGame() {
     renderRating();
     startTime = new Date().getTime();
     endTime = undefined;
+    timerInstance.reset();
+    timerInstance.start();
 }
 
+configureModel();
 document.querySelector('.restart')
     .addEventListener('click', resetGame)
-resetGame()
+resetGame();

@@ -7,14 +7,15 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+### How to play the game
+The game starts with 16 cards are organized ina random order. 
+Each card has a coresponding card on the set and you goal is to find that card.
 
-To get started, open `js/app.js` and start building out the app's functionality
+You can click on a card to have it opened, then attemp to find the coresponding card.
+If the two card match, they both will remain open and if they do not match, both cards will be turned over.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+You win if you have all the cards open, and your challenge is to do this in the shortest time posible.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This repository is private and is to be use as my assignment submision Therefore, I will not accept pull requests.
